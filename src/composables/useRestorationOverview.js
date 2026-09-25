@@ -1,18 +1,22 @@
-import { computed } from 'vue'
+import { computed, toValue } from 'vue'
 
-import {
-  restorationBatches,
-  restorationEnvironment,
-  restorationTasks,
-} from '../data/restorationData'
+/**
+ * 总览页统计口径。source 可以是数组、ref 或 getter；
+ * 数据未加载完成时按 0 计，避免显示陈旧数字。
+ */
+export function useRestorationOverview(source) {
+  const batches = computed(() => toValue(source.batches) ?? [])
+  const tasks = computed(() => toValue(source.tasks) ?? [])
+  const environment = computed(() => toValue(source.environment) ?? [])
 
-export function useRestorationOverview() {
-  const batchCount = computed(() => restorationBatches.length)
+  const batchCount = computed(() => batches.value.length)
   const highRiskCount = computed(
-    () => restorationTasks.filter((item) => item.risk === 'high').length,
+    () => tasks.value.filter((item) => item.risk === 'high').length,
   )
-  const environmentCount = computed(() => restorationEnvironment.length)
-  const ownerCount = computed(() => new Set(restorationTasks.map((item) => item.owner)).size)
+  const environmentCount = computed(() => environment.value.length)
+  const ownerCount = computed(
+    () => new Set(tasks.value.map((item) => item.owner)).size,
+  )
 
   return {
     batchCount,

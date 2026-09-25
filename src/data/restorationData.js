@@ -1,7 +1,9 @@
+// 三项导航名称与路径保持稳定：原有的 修复总览 / 批次档案 / 任务清单 继续有效。
+// name 与路由命名一致，缺失时可以直接定位到失效入口。
 export const restorationNavigation = [
-  { label: '修复总览', to: '/' },
-  { label: '批次档案', to: '/batches' },
-  { label: '任务清单', to: '/tasks' },
+  { name: 'dashboard', label: '修复总览', to: '/' },
+  { name: 'batches', label: '批次档案', to: '/batches' },
+  { name: 'tasks', label: '任务清单', to: '/tasks' },
 ]
 
 export const restorationHero = {

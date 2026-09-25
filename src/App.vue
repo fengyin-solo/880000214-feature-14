@@ -1,8 +1,12 @@
 <script setup>
+import { ref } from 'vue'
 import { RouterView } from 'vue-router'
 import AppHeader from './components/common/AppHeader.vue'
 import AppSidebar from './components/common/AppSidebar.vue'
-import { restorationNavigation } from './data/restorationData'
+import { useRouteScrollMemory } from './composables/useRouteScrollMemory'
+
+const appMain = ref(null)
+useRouteScrollMemory(appMain)
 </script>
 
 <template>
@@ -10,15 +14,18 @@ import { restorationNavigation } from './data/restorationData'
     <AppSidebar
       title="Conservation Desk"
       subtitle="古籍虫蛀修复"
-      :items="restorationNavigation"
     />
-    <div class="app-main">
+    <div ref="appMain" class="app-main">
       <AppHeader
         eyebrow="Studio Console"
         title="文献修复流程工作台"
-        description="补齐路由、视图、业务组件、数据层和工具函数，让这个项目更像一个能持续迭代的正式前端仓库。"
+        description="修复总览、批次档案与任务清单各自保留查看位置；地址异常、数据缺失或加载失败时均有明确空态与重试入口。"
       />
-      <RouterView />
+      <RouterView v-slot="{ Component }">
+        <KeepAlive :include="['DashboardView', 'BatchLibraryView', 'TaskBoardView']">
+          <component :is="Component" />
+        </KeepAlive>
+      </RouterView>
     </div>
   </div>
 </template>

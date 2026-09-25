@@ -19,7 +19,7 @@
 html,
 body,
 #app {
-  min-height: 100%;
+  height: 100%;
 }
 
 body {
@@ -32,21 +32,29 @@ a {
 }
 
 .app-shell {
-  min-height: 100vh;
+  height: 100vh;
   display: grid;
   grid-template-columns: 240px 1fr;
 }
 
+/* 主内容区是唯一的页面滚动容器，滚动位置按入口记忆与恢复。 */
 .app-main {
+  height: 100vh;
+  overflow-y: auto;
   padding: 30px 28px 40px;
+  scroll-behavior: auto;
 }
 
 @media (max-width: 980px) {
   .app-shell {
+    height: auto;
     grid-template-columns: 1fr;
   }
 
+  /* 窄屏整页滚动，顶部入口条保持吸顶，随时可达。 */
   .app-main {
+    height: auto;
+    overflow: visible;
     padding: 22px 16px 28px;
   }
 }
