@@ -2,7 +2,10 @@
 import { RouterView } from 'vue-router'
 import AppHeader from './components/common/AppHeader.vue'
 import AppSidebar from './components/common/AppSidebar.vue'
+import AppMobileNav from './components/common/AppMobileNav.vue'
 import { restorationNavigation } from './data/restorationData'
+
+const keepAliveViews = ['DashboardView', 'BatchLibraryView', 'TaskBoardView']
 </script>
 
 <template>
@@ -18,7 +21,12 @@ import { restorationNavigation } from './data/restorationData'
         title="文献修复流程工作台"
         description="补齐路由、视图、业务组件、数据层和工具函数，让这个项目更像一个能持续迭代的正式前端仓库。"
       />
-      <RouterView />
+      <RouterView v-slot="{ Component }">
+        <KeepAlive :include="keepAliveViews">
+          <component :is="Component" />
+        </KeepAlive>
+      </RouterView>
     </div>
+    <AppMobileNav :items="restorationNavigation" />
   </div>
 </template>

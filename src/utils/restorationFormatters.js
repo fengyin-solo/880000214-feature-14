@@ -1,3 +1,10 @@
+export const riskFilterOptions = [
+  { label: '全部', value: 'all' },
+  { label: '高风险', value: 'high' },
+  { label: '中风险', value: 'medium' },
+  { label: '低风险', value: 'low' },
+]
+
 export function riskMeta(risk) {
   const map = {
     high: {

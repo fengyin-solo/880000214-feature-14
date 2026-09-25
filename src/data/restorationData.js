@@ -1,7 +1,7 @@
 export const restorationNavigation = [
-  { label: '修复总览', to: '/' },
-  { label: '批次档案', to: '/batches' },
-  { label: '任务清单', to: '/tasks' },
+  { label: '修复总览', to: '/', icon: '🧭' },
+  { label: '批次档案', to: '/batches', icon: '🗂️' },
+  { label: '任务清单', to: '/tasks', icon: '✅' },
 ]
 
 export const restorationHero = {

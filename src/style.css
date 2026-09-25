@@ -47,6 +47,6 @@ a {
   }
 
   .app-main {
-    padding: 22px 16px 28px;
+    padding: 22px 16px calc(96px + env(safe-area-inset-bottom, 0px));
   }
 }
